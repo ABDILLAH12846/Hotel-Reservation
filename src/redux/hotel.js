@@ -17,7 +17,7 @@ const options = {
       departure_date: dest.checkout,
       guest_qty: '1',
       dest_ids: dest.destination,
-      room_qty: '1',
+      room_qty: dest.room_qty,
       search_type: 'city',
       children_qty: '2',
       children_age: '5,7',
@@ -28,7 +28,7 @@ const options = {
       travel_purpose: 'leisure'
     },
     headers: {
-      'X-RapidAPI-Key': '9db0cf554emsh5a13baf728234f3p13c768jsnd40c48fe7168',
+      'X-RapidAPI-Key': 'a1d5ef1a50mshcef0daca678daf0p1998dajsn646e270f5eb2',
       'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
     }
   };

@@ -7,9 +7,10 @@ import { styles } from './src/style/style';
 import { List } from './src/component/list';
 import kamu from './src/data/undraw_Login_re_4vu2.png'
 import axios from 'axios';
-import Login from './src/screen/login';
+// import Login from './src/screen/login';
+import { Login } from './src/screen/login/login';
 import { HomePage } from './src/screen/homepage';
-import { Detail } from './src/screen/detail';
+import { Detail } from './src/screen/detail/detail';
 import { Book } from './src/screen/book';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

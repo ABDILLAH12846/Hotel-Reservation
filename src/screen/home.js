@@ -3,7 +3,8 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { History } from './history'
 import { HomePage } from './homepage'
-import { Profile } from './profile'
+// import { Profile } from './profile'
+import { Profile } from './profile/profile'
 import { Feather } from '@expo/vector-icons';
 
 
@@ -40,12 +41,12 @@ export const Home = () => {
         tabBarActiveTintColor: '#121212',
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel:false,
-        tabBarStyle:{backgroundColor:'#FEE402',height:60}
+        tabBarStyle:{backgroundColor:'#FEE402',height:60,width:'90%',alignSelf:'center',borderRadius:24,position:'absolute',bottom:16,left:'5%'}
       })}
     >
         <Tab.Screen name='homepage' component={HomePage} options={{headerShown:false}}></Tab.Screen>
         <Tab.Screen name='history' component={History} options={{headerTitleAlign:'center',headerTitle:'History',headerShadowVisible:false}}></Tab.Screen>
-        <Tab.Screen name='profile' component={Profile} options={{headerTitleAlign:'center',headerTitle:'Profile',headerShadowVisible:false}}></Tab.Screen>
+        <Tab.Screen name='profile' component={Profile} options={{headerTitleAlign:'center',headerTitle:'Profile',headerShadowVisible:false,headerShown:false}}></Tab.Screen>
     </Tab.Navigator>
   )
 }

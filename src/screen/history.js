@@ -5,13 +5,15 @@ import { useSelector } from 'react-redux'
 import { BookList } from '../component/bookList'
 import { Exept } from '../component/exept'
 import { Null } from '../component/null'
+import { useProfile } from '../hook/useProfile'
 import { styles } from '../style/style'
 
 export const History = () => {
-  const {history} = useSelector((state)=>state.login)
+  const {history} = useSelector((state)=>state.history)
+  const {isLogin} = useProfile()
   const {login}= useSelector((state)=>state.login)
   const navigatin = useNavigation()
-  if (login === '') {
+  if (!isLogin) {
     return <Exept/>
   }
   return (
@@ -22,7 +24,7 @@ export const History = () => {
         <Image source={require('../data/undraw_void_3ggu.png')} style={{width:'100%',height:300}}></Image>
         :
         history.map((val)=>(
-          <BookList data={val.data}/>
+          <BookList data={val}/>
           // <Text>{JSON.stringify(val)}</Text>
         ))
         }

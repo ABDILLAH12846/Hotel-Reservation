@@ -155,7 +155,7 @@ export const styles = StyleSheet.create({
     textLabel: {
         fontSize: 20,
         fontWeight: '600',
-        color: '#FEE402'
+        color: '#121212'
     },
     subText: {
         fontSize: 14,
@@ -266,6 +266,20 @@ export const styles = StyleSheet.create({
         textAlign: 'right'
 
     },
+    profilePhoto: {
+        backgroundColor: 'white',
+        width: 100,
+        height: 100,
+        borderRadius: '50%'
+    },
+    profileBottom: {
+        height: '70%',
+        backgroundColor: 'white',
+        width: '100%',
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        padding: 24
+    },
     bookList: {
         width: '100%',
         height: 100,
@@ -337,7 +351,7 @@ export const styles = StyleSheet.create({
         height: 250,
         borderRadius: 12,
         backgroundColor: '#FEE402',
-        marginBottom:24
+        marginBottom: 24
     },
     wrapper: {
         width: '100%',
@@ -347,8 +361,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 12,
-        borderBottomLeftRadius:12,
-        borderBottomRightRadius:12
+        borderBottomLeftRadius: 12,
+        borderBottomRightRadius: 12
     },
     viewMore: {
         backgroundColor: '#fff',
@@ -360,15 +374,35 @@ export const styles = StyleSheet.create({
         color: '#121212',
         fontSize: 14
     },
-    hotel:{
-        padding:24,
-        width:'100%'
+    hotel: {
+        padding: 24,
+        width: '100%'
     },
-    slider1:{
-        width:120,
-        height:120,
+    slider1: {
+        width: 120,
+        height: 120,
         // backgroundColor:'black',
-        marginRight:24,
-        borderRadius:12
+        marginRight: 24,
+        borderRadius: 12
+    },
+    harga: {
+        fontSize: 18,
+        padding: 6,
+        borderRadius: 24,
+        marginVertical: 6,
+        backgroundColor: '#F6F3DC',
+        maxWidth: '50%',
+        textAlign: 'center',
+        color: '#FEE402',
+        fontWeight:'600'
+    },
+    key:{
+        fontWeight:'600',
+        color: '#FEE402',
+    },
+    value:{
+        marginBottom:8,
+        fontSize:14,
+        marginTop:4
     }
 });

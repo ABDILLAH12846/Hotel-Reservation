@@ -6,8 +6,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLike, userUnlike } from '../redux/user_login';
 import { liking, unliking } from '../redux/wish';
+import { useProfile } from '../hook/useProfile';
 
 export const ListHotel = ({ data }) => {
+    const {isLogin} = useProfile()
     const { login } = useSelector((state) => state.login)
     const { like } = useSelector((state) => state.like)
     const [color, setColor] = useState('gray')
@@ -28,9 +30,9 @@ export const ListHotel = ({ data }) => {
                 }
             })
     }
-    console.log(like);
+    // console.log(like);
     const ngelike = () => {
-        if (login === '') {
+        if (!isLogin) {
             navigation.push('login')
         } else {
 

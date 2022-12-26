@@ -12,9 +12,11 @@ import { ListHotel } from '../component/listHotel'
 
 import { fetchHotel } from '../redux/hotel.js'
 import { Loading } from '../component/loading'
+import { checkinDate, checkoutDate, roomQty } from '../redux/detai'
+import { useLogin } from '../hook/useLogin'
 
 export const HomePage = () => {
-
+    const { isLogin } = useLogin()
     const navigation = useNavigation()
     const dispach = useDispatch()
     const { city, loading } = useSelector((state) => state.city)
@@ -26,17 +28,19 @@ export const HomePage = () => {
     const [kota, setTown] = useState('')
     const [checkin, setCheckin] = useState('')
     const [checkout, setCheckout] = useState('')
+    const [room, setRoom] = useState('1')
     const ress = () => {
         console.log('kamu');
         dispach(reset('miliku'))
     }
     const search = (kota) => {
+
         const options = {
             method: 'GET',
             url: 'https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete',
             params: { text: kota, languagecode: 'en-us' },
             headers: {
-                'X-RapidAPI-Key': '9db0cf554emsh5a13baf728234f3p13c768jsnd40c48fe7168',
+                'X-RapidAPI-Key': 'a1d5ef1a50mshcef0daca678daf0p1998dajsn646e270f5eb2',
                 'X-RapidAPI-Host': 'apidojo-booking-v1.p.rapidapi.com'
             }
         };
@@ -52,7 +56,9 @@ export const HomePage = () => {
             setColor2('#f9dedc')
         }
         else {
-
+            dispach(checkinDate(checkin))
+            dispach(checkoutDate(checkout))
+            dispach(roomQty(room))
             dispach(fetchCity(options))
         }
     }
@@ -74,22 +80,14 @@ export const HomePage = () => {
 
                     <Text style={{ fontSize: 18 }}>TURU</Text>
                 </Pressable>
-                {!login ?
+                {!isLogin ?
                     <Pressable style={styles.loginButton} onPress={() => navigation.push('login')}><Text>Login</Text></Pressable>
                     :
-                    <Pressable onPress={()=>navigation.navigate('wishlist')}>
+                    <Pressable onPress={() => navigation.navigate('wishlist')}>
                         <Feather name="heart" size={24} color="black" />
                     </Pressable>
                 }
             </View>
-            {login ?
-                <View style={styles.greeting}>
-                    <Text style={styles.textWhite}>Hello,</Text>
-                    <Text style={styles.textWhite}>{login.email}</Text>
-                </View>
-                :
-                <View />
-            }
 
 
             <ScrollView style={{ paddingHorizontal: 24, width: '100%' }}>
@@ -121,6 +119,9 @@ export const HomePage = () => {
                     </View>
 
                 </View>
+                <View style={styles.searchBox}>
+                    <TextInput placeholderTextColor='gray' placeholder='room quantity | 1 - 20' style={styles.input} onChangeText={(val) => setRoom(val)}></TextInput>
+                </View>
                 {
                     loading
                         ?
@@ -128,9 +129,9 @@ export const HomePage = () => {
                         :
 
                         city.length > 0
-                            ? city.map((val,ind) => (
+                            ? city.map((val, ind) => (
 
-                                <ListCity key={ind} data={val} checkin={checkin} checkout={checkout} />
+                                <ListCity key={ind} data={val} checkin={checkin} checkout={checkout} room_qty={room} />
                             ))
                             :
                             // <Text>Kamu</Text>
@@ -138,7 +139,7 @@ export const HomePage = () => {
                                 <Text style={{ fontWeight: '600', fontSize: 18, marginVertical: 12 }}>Top Destination</Text>
                                 <View style={{ height: 120, marginBottom: 24 }}>
                                     <ScrollView horizontal={true} >
-                                        {top_destination.map((val,ind) => (
+                                        {top_destination.map((val, ind) => (
 
                                             <Pressable key={ind} style={styles.slider1} onPress={() => search(val.name)}>
                                                 <Image
@@ -155,7 +156,7 @@ export const HomePage = () => {
                                 <Text style={{ fontWeight: '600', fontSize: 18, marginVertical: 12 }}>Top Destination</Text>
                                 <View style={{ height: 120, marginBottom: 24 }}>
                                     <ScrollView horizontal={true} >
-                                        {popular.map((val,ind) => (
+                                        {popular.map((val, ind) => (
 
                                             <Pressable key={ind} style={styles.slider1} onPress={() => search(val.name)}>
                                                 <Image
@@ -192,6 +193,7 @@ export const HomePage = () => {
                     <Pressable style={styles.love}></Pressable>
                 </View>
             </ScrollView> */}
+            <View style={{height:60}}></View>
         </View>
     )
 }

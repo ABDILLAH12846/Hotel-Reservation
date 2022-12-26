@@ -1,13 +1,26 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Image, Pressable, Text, ScrollView, TextInput } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BookList } from '../component/bookList'
 import { Input } from '../component/input'
 import { userHistory } from '../redux/user_login'
 import { styles } from '../style/style'
 
 export const Book = () => {
+
+  const { checkin, checkout, room } = useSelector((state) => state.detail)
+  const [price, setPrice] = useState(1)
+  console.log(checkin, checkout);
+  const date = () => {
+    if (checkin > checkout) {
+      setPrice((checkout + 30) - checkin)
+      console.log(price);
+    } else {
+      setPrice(checkout - checkin)
+      
+    }
+  }
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone1, setPhone1] = useState('')
@@ -22,12 +35,14 @@ export const Book = () => {
     phone: `${phone1}${phone2}`,
     data
   }
-  const checkout = ()=>{
+  const checkoutTiket = () => {
     dispach(userHistory(checkoutData))
     navigation.navigate('history')
   }
- 
-  
+  useEffect(()=>{
+    date
+  },[])
+
   return (
     <View style={[styles.container, { padding: 24 }]}>
       <View style={styles.profileTitle}>Contact Information</View>
@@ -51,10 +66,10 @@ export const Book = () => {
       </View>
       <View style={[styles.profileTitle, { marginTop: 24 }]}>Price Summary</View>
       <View style={styles.struct}>
-        <Text>1 days | 1 rooms</Text>
+        <Text>{price} days | {room} rooms</Text>
         <View style={styles.structChild}>
           <Text>Total</Text>
-          <Text>${data.min_total_price}</Text>
+          <Text>${data.min_total_price * price * room}</Text>
         </View>
         <View style={styles.structChild}>
           <Text>Payable Now</Text>
@@ -62,7 +77,7 @@ export const Book = () => {
         </View>
       </View>
       <View style={[styles.checkinBox, { position: 'absolute', bottom: 0, left: 0 }]}>
-        <Pressable style={styles.checkinBtn} onPress={checkout}>Booking</Pressable>
+        <Pressable style={styles.checkinBtn} onPress={checkoutTiket}>Booking</Pressable>
       </View>
     </View>
   )

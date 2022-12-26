@@ -19,7 +19,7 @@ export const Hotel = () => {
     useEffect(() => {
         listing()
     }, [])
-    console.log(hotel);
+    // console.log(hotel);
     if (loading) {
         return <Loading />
     }

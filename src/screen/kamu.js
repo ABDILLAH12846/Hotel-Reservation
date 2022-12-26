@@ -1,18 +1,21 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLogin } from '../hook/useLogin'
 import { userHistory } from '../redux/user_login'
 import { styles } from '../style/style'
 
 export const Detail = () => {
     const {login}= useSelector((state)=>state.login)
+    const {isLogin} = useLogin()
+    const {checkinDate,checkoutDate,roomQty} = useSelector((state)=>state.detail)
     const dispach = useDispatch()
     const route = useRoute()
     const data = route.params.description
     const navigation = useNavigation()
     const checkout = ()=>{
-        if(login === ''){
+        if(!isLogin){
 
             navigation.push('login')
         }else{
